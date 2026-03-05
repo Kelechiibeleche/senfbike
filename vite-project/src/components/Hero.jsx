@@ -60,15 +60,6 @@ export default function Hero() {
               <span className="storeBadge">Google Play</span>
             </div>
           </div>
-
-          {/* RIGHT: floating image */}
-          <div className="hero__floatWrap">
-            <img
-              className="hero__floatImg"
-              src="/images/hero-float.png"
-              alt="SenfBike App Vorschau"
-            />
-          </div>
         </div>
       </div>
     </section>

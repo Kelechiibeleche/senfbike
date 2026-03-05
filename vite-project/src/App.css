@@ -12,11 +12,13 @@
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family:
     system-ui,
@@ -27,6 +29,7 @@ body {
   color: var(--text);
   background: #fff;
 }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -34,13 +37,20 @@ a {
 
 /* CONTAINER */
 .container {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
 }
 
+/* Wider container only for sections that should stretch more */
+.container--wide {
+  width: calc(100% - 64px);
+  max-width: 1400px;
+}
+
 /* =========================
-   HEADER (FULL WIDTH)
+   HEADER
 ========================= */
+
 .header {
   position: sticky;
   top: 0;
@@ -51,16 +61,11 @@ a {
   border-bottom: 1px solid var(--border);
 }
 
-.header__full {
-  width: 100%;
-}
-
 .header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  gap: 16px;
 }
 
 .brand {
@@ -75,19 +80,26 @@ a {
   gap: 20px;
   font-weight: 600;
 }
+
 .nav a:hover {
   color: var(--seeblau);
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 10px 16px;
   border-radius: 999px;
+
   border: 1px solid var(--border);
   background: #fff;
+
   font-weight: 700;
   cursor: pointer;
 }
@@ -95,7 +107,7 @@ a {
 .btn--primary {
   background: var(--seeblau);
   border-color: var(--seeblau);
-  color: #fff;
+  color: white;
 }
 
 .btn--accent {
@@ -111,33 +123,41 @@ a {
 }
 
 /* =========================
-   HERO (FULL WIDTH IMAGE)
+   HERO
 ========================= */
+
 .hero {
   position: relative;
   width: 100%;
-  min-height: 75vh;
+  min-height: 520px;
+  height: 75vh;
+
   display: flex;
   align-items: center;
   overflow: hidden;
+
+  padding: 64px 0;
 }
 
 /* background image */
 .hero__image {
   position: absolute;
   inset: 0;
+
   width: 100vw;
   left: 50%;
   transform: translateX(-50%) scale(1.04);
+
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
   transition: opacity 450ms ease;
+
   opacity: 1;
   z-index: 0;
 }
 
-/* when changing slides, fade down */
 .hero__image.isFading {
   opacity: 0.25;
 }
@@ -147,16 +167,17 @@ a {
   content: "";
   position: absolute;
   inset: 0;
+
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.6) 0%,
     rgba(0, 0, 0, 0.3) 55%,
     rgba(0, 0, 0, 0.15) 100%
   );
+
   z-index: 1;
 }
 
-/* hero content */
 .hero .container {
   position: relative;
   z-index: 2;
@@ -171,7 +192,7 @@ a {
   font-size: clamp(36px, 4.5vw, 58px);
   line-height: 1.15;
   margin: 0 0 14px;
-  color: #fff;
+  color: white;
 }
 
 .hero p {
@@ -190,6 +211,7 @@ a {
 /* =========================
    SECTIONS
 ========================= */
+
 .section {
   padding: 72px 0;
 }
@@ -198,49 +220,112 @@ a {
   background: var(--muted);
 }
 
-.section h2 {
-  font-size: 32px;
-  margin: 0 0 10px;
+.sectionTitle {
+  font-size: 34px;
+  margin: 0 0 12px;
 }
 
-.section p {
-  max-width: 720px;
-  opacity: 0.85;
+.sectionSubtitle {
+  margin: 0 0 30px;
+  opacity: 0.8;
 }
 
-/* GRIDS */
-.grid3 {
+/* =========================
+   HOW IT WORKS  (DESKTOP: EXTREME LEFT & RIGHT)
+========================= */
+
+.howGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 24px;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+
+  width: 100%;
+  justify-content: space-between;
 }
 
-.grid2 {
+.howSteps {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
-  margin-top: 24px;
+
+  justify-self: start; /* force left */
 }
 
-/* CARDS */
-.card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  background: #fff;
+/* cards */
+.howCard {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  padding: 18px;
+
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.card h3 {
-  margin-top: 0;
+.howCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* number circle */
+.howNum {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(11, 95, 165, 0.12);
+  color: var(--seeblau);
+  font-weight: 900;
+}
+
+/* card text */
+.howText h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.howText p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: 0.75;
+}
+
+/* preview image */
+.howPreview {
+  justify-self: end; /* force right */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.howPreviewImg {
+  width: 360px;
+  border-radius: 24px;
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+
+  transform: rotate(-4deg);
 }
 
 /* =========================
    CTA
 ========================= */
+
 .cta {
   background: linear-gradient(135deg, var(--seeblau), #063a66);
-  color: #fff;
+  color: white;
   padding: 52px 0;
 }
 
@@ -255,23 +340,23 @@ a {
 .cta__buttons {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
 }
 
 /* =========================
    FOOTER
 ========================= */
+
 .footer {
   background: #141414;
-  color: #fff;
+  color: white;
   padding: 48px 0;
 }
 
 .footer__inner {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
 .footer__links {
@@ -281,8 +366,9 @@ a {
 }
 
 /* =========================
-   MOBILE
+   MOBILE (STACK)
 ========================= */
+
 @media (max-width: 900px) {
   .nav {
     display: none;
@@ -290,14 +376,31 @@ a {
 
   .hero {
     min-height: 68vh;
+    height: auto;
   }
 
   .hero__inner {
     padding: 72px 0;
   }
 
-  .grid3,
-  .grid2 {
+  /* HOW IT WORKS: stack properly on mobile */
+  .howGrid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .howSteps {
+    grid-template-columns: 1fr;
+  }
+
+  .howPreview {
+    justify-self: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .howPreviewImg {
+    width: min(320px, 92%);
+    transform: rotate(-2deg);
   }
 }
